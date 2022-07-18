@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">SKCK POLRES PRINGSEWU</string>
+    <string-array name="array_kecamatan">
+        <item>GADINGREJO</item>
+        <item>PRINGSEWU</item>
+        <item>AMBARAWA</item>
+        <item>PARDASUKA</item>
+        <item>SUKOHARJO</item>
+        <item>BANYUMAS</item>
+        <item>ADILUWIH</item>
+        <item>PAGELARAN</item>
+        <item>PAGELARAN UTARA</item>
+    </string-array>
+
+    <string-array name="array_kebutuhan">
+        <item>TNI/POLRII</item>
+        <item>BEKERJA</item>
+        <item>MENIKAH</item>
+        <item>LEGISLATIF</item>
+        <item>CPNS</item>
+        <item>APARAT PEKON</item>
+        <item>CALON KAKON</item>
+        <item>MELANJUTKAN PENDIDIKAN</item>
+        <item>PINDAH ALAMAT</item>
+        <item>PWI</item>
+        <item>SATPAM</item>
+        <item>BAZNAS</item>
+        <item>KERJASAMA</item>
+    </string-array>
+
+    <string-array name="array_jenis_kelamin">
+        <item>PRIA</item>
+        <item>WANITA</item>
+    </string-array>
+
+
+</resources>

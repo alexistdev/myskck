@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-937247306/SKCK_POLRES_PRINGSEWU.iml" filepath="$PROJECT_DIR$/.idea/modules/-937247306/SKCK_POLRES_PRINGSEWU.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SKCK_POLRES_PRINGSEWU.app.iml" filepath="$PROJECT_DIR$/.idea/modules/SKCK_POLRES_PRINGSEWU.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SKCK_POLRES_PRINGSEWU.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/SKCK_POLRES_PRINGSEWU.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SKCK_POLRES_PRINGSEWU.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/SKCK_POLRES_PRINGSEWU.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SKCK_POLRES_PRINGSEWU.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/SKCK_POLRES_PRINGSEWU.app.unitTest.iml" />
+    </modules>
+  </component>
+</project>

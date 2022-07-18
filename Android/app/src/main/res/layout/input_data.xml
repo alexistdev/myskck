@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".input_data">
+
+    <EditText
+
+
+        android:id="@+id/inputnik"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+        android:drawablePadding="20dp"
+        android:hint="NIK"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.16"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <EditText
+        android:id="@+id/inputnama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/inputnik"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_info_24"
+        android:drawablePadding="20dp"
+        android:hint="NAMA"
+        android:inputType="text"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.292"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spiner1"
+        android:layout_width="409dp"
+        android:layout_height="49dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_info_24"
+        android:hint="kecamatan"
+        android:entries="@array/array_kecamatan"
+        android:spinnerMode="dropdown"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.412"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spiner3"
+        android:layout_width="410dp"
+        android:layout_height="53dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_info_24"
+        android:text="jenis kelamin"
+        android:entries="@array/array_jenis_kelamin"
+        android:spinnerMode="dropdown"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.634"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spiner2"
+        android:layout_width="408dp"
+        android:layout_height="53dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_info_24"
+        android:hint="keperluan"
+        android:entries="@array/array_kebutuhan"
+        android:spinnerMode="dropdown"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.517"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="3dp" />
+
+    <Button
+        android:id="@+id/buttoninput"
+        android:layout_width="233dp"
+        android:layout_height="92dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:text="INPUT DATA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="keterangan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.72" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
