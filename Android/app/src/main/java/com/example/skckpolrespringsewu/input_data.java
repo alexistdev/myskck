@@ -1,109 +1,110 @@
 package com.example.skckpolrespringsewu;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.textclassifier.TextSelection;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+import com.example.skckpolrespringsewu.api.APIService;
+import com.example.skckpolrespringsewu.model.SkckModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.internal.EverythingIsNonNull;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import java.util.HashMap;
-import java.util.Map;
-
-public class input_data extends AppCompatActivity implements View.OnClickListener{
-
-    private Button btninput;
-    private EditText inputnik,inputnama;
-
-    public static final String URLINSERT = "http://192.168.43.49/skck/insert.php";
-
-    Spinner spinerkebutuhan, spinerkecamatan, spinerjeniskelamin;
+public class input_data extends AppCompatActivity {
+    private ProgressDialog pDialog;
+    private EditText mNik,mNama;
+    private Spinner mKecamatan, mStatus, mJk;
+    private Button mSimpan;
 
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.input_data);
-
-
-
-
+        Toolbar toolbar = findViewById(R.id.tbtoolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Tambah Data");
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        initData();
+        mSimpan.setOnClickListener(view -> prosesSimpan());
     }
+    private void prosesSimpan() {
 
-    //Dibawah ini merupakan perintah untuk Menambahkan skck (CREATE)
-    private void tambahskck(){
-
-        final String nik = inputnik.getText().toString().trim();
-        final String nama = inputnama.getText().toString().trim();
-        final AdapterView.OnItemSelectedListener kecamatan = spinerkecamatan.getOnItemSelectedListener();
-        final AdapterView.OnItemSelectedListener kebutuhan = spinerkebutuhan.getOnItemSelectedListener();
-
-
-        class tambahskck extends AsyncTask<Void,Void,String> {
-
-            ProgressDialog loading;
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                loading = ProgressDialog.show(input_data.this,"Menambahkan...","Tunggu...",false,false);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                loading.dismiss();
-                Toast.makeText(input_data.this,s,Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            protected String doInBackground(Void... v) {
-                HashMap<String,String> params = new HashMap<>();
-                params.put(konfigurasi.KEY_EMP_NIK,nik);
-                params.put(konfigurasi.KEY_EMP_NAMA,nama);
-                params.put(konfigurasi.KEY_EMP_KECAMATAN, String.valueOf(kecamatan));
-                params.put(konfigurasi.KEY_EMP_KEBUTUHAN, String.valueOf(kebutuhan));
+        tampilLoading();
+        String nik = mNik.getText().toString();
+        String nama = mNama.getText().toString();
+        String kecamatan = mKecamatan.getSelectedItem().toString();
+        String status = mStatus.getSelectedItem().toString();
+        String jk = mJk.getSelectedItem().toString();
+        if(nik.length() == 0 || nama.length() == 0 || kecamatan.length() == 0 || status.length() == 0 || jk.length() == 0 ){
+            SembunyiLoading();
+            pesan("Semua kolom harus diisi!");
+        } else {
 
 
-
-
-                RequestHandler rh = new RequestHandler();
-                String res = rh.sendPostRequest(konfigurasi.URL_ADD, params);
-                return res;
+            try{
+                Call<SkckModel> call= APIService.Factory.create(getApplicationContext()).tambahData(nik,nama,kecamatan,status,jk);
+                call.enqueue(new Callback<SkckModel>() {
+                    @EverythingIsNonNull
+                    @Override
+                    public void onResponse(Call<SkckModel> call, Response<SkckModel> response) {
+                        if(response.isSuccessful()) {
+                            SembunyiLoading();
+                            pesan("Data SKCK Berhasil ditambahkan!");
+                        }
+                    }
+                    @EverythingIsNonNull
+                    @Override
+                    public void onFailure(Call<SkckModel> call, Throwable t) {
+                        SembunyiLoading();
+                        pesan(t.getMessage());
+                    }
+                });
+            }catch (Exception e){
+                SembunyiLoading();
+                e.printStackTrace();
+                pesan(e.getMessage());
             }
         }
 
-        tambahskck ae = new tambahskck();
-        ae.execute();
+    }
+    private void initData(){
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Loading.....");
+        mNik = findViewById(R.id.inputnik);
+        mNama = findViewById(R.id.inputnama);
+        mKecamatan = findViewById(R.id.spn_kecamatan);
+        mStatus = findViewById(R.id.spn_status);
+        mJk = findViewById(R.id.spn_jk);
+        mSimpan = findViewById(R.id.buttoninput);
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v == btninput){
-            tambahskck();
+    private void tampilLoading(){
+        if(!pDialog.isShowing()){
+            pDialog.show();
         }
-
-
-
     }
+
+    private void SembunyiLoading(){
+        if(pDialog.isShowing()){
+            pDialog.dismiss();
+        }
+    }
+
+    public void pesan(String msg)
+    {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
 }
 

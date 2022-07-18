@@ -6,10 +6,17 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".input_data">
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbtoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white" />
     <EditText
-
-
         android:id="@+id/inputnik"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +51,7 @@
         tools:layout_editor_absoluteX="1dp" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spiner1"
+        android:id="@+id/spn_kecamatan"
         android:layout_width="409dp"
         android:layout_height="49dp"
         android:layout_alignParentEnd="true"
@@ -62,7 +69,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spiner3"
+        android:id="@+id/spn_jk"
         android:layout_width="410dp"
         android:layout_height="53dp"
         android:layout_alignParentEnd="true"
@@ -80,7 +87,7 @@
         tools:layout_editor_absoluteX="1dp" />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spiner2"
+        android:id="@+id/spn_status"
         android:layout_width="408dp"
         android:layout_height="53dp"
         android:layout_alignParentEnd="true"
@@ -109,16 +116,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="keterangan"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,6 +17,7 @@
             android:exported="false" />
         <activity
             android:name=".input_data"
+            android:parentActivityName=".home"
             android:exported="false" />
         <activity
             android:name=".home"
