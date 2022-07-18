@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Skck;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Exception;
 
 class SKCKController extends Controller
 {
@@ -25,17 +27,27 @@ class SKCKController extends Controller
                 'message' => "data tidak lengkap",
             ], 404);
         } else {
-            $skck = new Skck();
-            $skck->nik = $request->nik;
-            $skck->nama = $request->nama;
-            $skck->kecamatan = $request->kecamatan;
-            $skck->status = $request->status;
-            $skck->jk = $request->jk;
-            $skck->save();
-            return response()->json([
-                'status' => true,
-                'message' => 'Berhasil menyimpan data',
-            ]);
+            DB::beginTransaction();
+            try{
+                $skck = new Skck();
+                $skck->nik = $request->nik;
+                $skck->nama = $request->nama;
+                $skck->kecamatan = $request->kecamatan;
+                $skck->status = $request->status;
+                $skck->jk = $request->jk;
+                $skck->save();
+                DB::commit();
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Berhasil menyimpan data',
+                ]);
+            } catch (Exception $e) {
+                DB::rollback();
+                return response()->json([
+                    'status' => false,
+                    'message' => $e->getMessage(),
+                ]);
+            }
         }
     }
 }

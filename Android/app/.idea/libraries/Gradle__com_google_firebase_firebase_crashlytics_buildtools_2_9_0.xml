@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.firebase:firebase-crashlytics-buildtools:2.9.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-crashlytics-buildtools/2.9.0/95b646976099a27ccccf3dee149319f8ea959f69/firebase-crashlytics-buildtools-2.9.0.jar!/" />
+      <root url="jar://C:/Gradle/gradle-7.2/bin/caches/modules-2/files-2.1/com.google.firebase/firebase-crashlytics-buildtools/2.9.0/95b646976099a27ccccf3dee149319f8ea959f69/firebase-crashlytics-buildtools-2.9.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
