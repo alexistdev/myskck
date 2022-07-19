@@ -32,6 +32,12 @@
         <item>PRIA</item>
         <item>WANITA</item>
     </string-array>
+    <string name="card1">Faisal</string>
+    <string name="card2">NIK: 1234567</string>
+    <string name="card3">Jenis Kelamin: Pria</string>
+    <string name="card4">Status: Menikah</string>
+    <string name="card5">Kecamatan: Gading Rejo</string>
+    <string name="card6">Tanggal: 01&#8211;01&#8211;2022</string>
 
 
 </resources>
