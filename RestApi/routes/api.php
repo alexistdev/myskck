@@ -18,5 +18,6 @@ use App\Http\Controllers\Api\SKCKController as skck;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::get('/skck', [skck::class, 'get_skck'])->name('api.skck');
 Route::post('/skck', [skck::class, 'tambah'])->name('api.tambah');
+

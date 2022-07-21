@@ -40,7 +40,7 @@ class SKCKController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => 'Berhasil menyimpan data',
-                ]);
+                ],200);
             } catch (Exception $e) {
                 DB::rollback();
                 return response()->json([
@@ -48,6 +48,34 @@ class SKCKController extends Controller
                     'message' => $e->getMessage(),
                 ]);
             }
+        }
+    }
+
+    public function get_skck(Request $request)
+    {
+        $rules = array(
+            'cari' => 'max:255',
+        );
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => "data tidak lengkap",
+            ], 404);
+        } else {
+            if(isset($request->cari)){
+                $skck = Skck::where('nik','like',$request->cari)->orWhere('nama','like','%'.$request->cari.'%')->limit(20)->get();
+            } else {
+                $skck = Skck::limit(20)->get();
+            }
+
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil menyimpan data',
+                'result' => $skck,
+                'jumlah' => $skck->count(),
+            ],200);
         }
     }
 }

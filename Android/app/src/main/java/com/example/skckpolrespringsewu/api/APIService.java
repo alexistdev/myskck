@@ -3,6 +3,7 @@ package com.example.skckpolrespringsewu.api;
 import android.content.Context;
 import com.example.skckpolrespringsewu.config.Constants;
 import com.example.skckpolrespringsewu.model.SkckModel;
+import com.example.skckpolrespringsewu.response.GetSkck;
 
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
@@ -12,9 +13,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface APIService {
+
+    @GET("api/skck")
+    Call<GetSkck> dapatSKCK(@Query("cari") String cari);
 
     @FormUrlEncoded
     @POST("api/skck")

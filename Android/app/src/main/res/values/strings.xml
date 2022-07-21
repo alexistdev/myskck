@@ -39,5 +39,13 @@
     <string name="card5">Kecamatan: Gading Rejo</string>
     <string name="card6">Tanggal: 01&#8211;01&#8211;2022</string>
 
+    <!-- CARI -->
+    <string name="cari1">-- / -- / ----</string>
+    <string name="cari2">CEK</string>
+    <string name="cari3">TO -></string>
+    <string name="cari4">Jumlah data :</string>
+    <string name="cari5">0</string>
+    <string name="cari6">Grand Total :</string>
+
 
 </resources>
