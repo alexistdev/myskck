@@ -49,8 +49,6 @@ public class input_data extends AppCompatActivity {
             SembunyiLoading();
             pesan("Semua kolom harus diisi!");
         } else {
-
-
             try{
                 Call<SkckModel> call= APIService.Factory.create(getApplicationContext()).tambahData(nik,nama,kecamatan,status,jk);
                 call.enqueue(new Callback<SkckModel>() {

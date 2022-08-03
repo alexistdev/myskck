@@ -54,7 +54,7 @@ class SKCKController extends Controller
     public function get_skck(Request $request)
     {
         $rules = array(
-            'cari' => 'max:255',
+            'cari' => 'required|max:255',
         );
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -64,12 +64,14 @@ class SKCKController extends Controller
             ], 404);
         } else {
             if(isset($request->cari)){
-                $skck = Skck::where('nik','like',$request->cari)->orWhere('nama','like','%'.$request->cari.'%')->limit(20)->get();
+                $skck = Skck::where('nik','like','%'.$request->cari.'%')
+                    ->orWhere('nama','like','%'.$request->cari.'%')
+                    ->orWhere('status','like','%'.$request->cari.'%')
+                    ->orWhere('kecamatan','like','%'.$request->cari.'%')
+                    ->limit(20)->get();
             } else {
-                $skck = Skck::limit(20)->get();
+                $skck = Skck::limit(100)->get();
             }
-
-
             return response()->json([
                 'status' => true,
                 'message' => 'Berhasil menyimpan data',

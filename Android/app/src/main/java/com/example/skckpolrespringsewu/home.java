@@ -34,6 +34,5 @@ public class home extends AppCompatActivity {
                 startActivity(inte);
             }
         });
-
     }
 }
