@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Skck;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Exception;
@@ -94,12 +93,10 @@ class SKCKController extends Controller
                     $endDate  =date("Y-m-d",strtotime($request->tanggal_akhir));
                     $skck = Skck::whereBetween('tanggal', [$startDate, $endDate])
                         ->limit(100)->get();
-
                 } else {
                     $startDate  =date("Y-m-d",strtotime($request->tanggal_mulai));
                     $skck = Skck::whereBetween('tanggal', [$startDate, $startDate])
                         ->limit(100)->get();
-
                 }
             } else {
                 $skck = Skck::all();
@@ -135,7 +132,7 @@ class SKCKController extends Controller
                 DB::commit();
                 return response()->json([
                     'status' => true,
-                    'message' => "data tidak lengkap",
+                    'message' => "berhasil dihapus",
                 ], 200);
             } catch (Exception $e) {
                 DB::rollback();

@@ -12,10 +12,10 @@ class Skck extends Model
     use HasFactory;
 
     protected $fillable =['nik','nama','kecamatan','status','jk'];
-//    protected $casts = [
-////        'created_at' => 'datetime:m-d-Y',
-//        'created_at' => 'datetime:d-m-Y',
-//    ];
+    protected $casts = [
+//        'created_at' => 'datetime:m-d-Y',
+        'created_at' => 'datetime:d-m-Y',
+    ];
 
 
 

@@ -11,6 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -18,6 +19,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface APIService {
+    @DELETE("api/skck")
+    Call<SkckModel> hapusData(@Query("skck_id") String idSKCK);
+
 
     @GET("api/skck")
     Call<GetSkck> dapatSKCK(@Query("cari") String cari,@Query("tanggal_mulai") String tanggalMulai,@Query("tanggal_akhir") String tanggalAkhir);

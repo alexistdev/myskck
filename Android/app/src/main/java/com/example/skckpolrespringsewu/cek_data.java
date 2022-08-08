@@ -35,7 +35,7 @@ import retrofit2.Response;
 import retrofit2.internal.EverythingIsNonNull;
 
 
-public class cek_data extends AppCompatActivity implements View.OnClickListener {
+public class cek_data extends AppCompatActivity implements View.OnClickListener,Skckadapter.ClickListener {
     private ProgressDialog pDialog;
     private Skckadapter skckadapter;
     private List<SkckModel> daftarskck;
@@ -43,6 +43,7 @@ public class cek_data extends AppCompatActivity implements View.OnClickListener 
     private Button mCari;
     private EditText edCari,edMulai,edAkhir;
     private TextView jmlData;
+    private Skckadapter.ClickListener clickListener;
 //    private int mYear, mMonth, mDay;
 
 
@@ -50,6 +51,7 @@ public class cek_data extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cek_data);
+        clickListener=this;
         initData();
         setupRecyclerView();
 
@@ -67,6 +69,41 @@ public class cek_data extends AppCompatActivity implements View.OnClickListener 
             }
         });
     }
+    @Override
+    public void dataItem(String idSKCK, String msg) {
+        hapus(idSKCK);
+    }
+
+    private void hapus(String idSKCK){
+        try{
+            tampilLoading();
+            Call<SkckModel> call=APIService.Factory.create(getApplicationContext()).hapusData(idSKCK);
+            call.enqueue(new Callback<SkckModel>() {
+                @Override
+                public void onResponse(Call<SkckModel> call, Response<SkckModel> response) {
+                    SembunyiLoading();
+                    if(response.isSuccessful()) {
+                        if (response.body() != null) {
+                            pesan("data berhasil dihapus!");
+                            setupRecyclerView();
+                            setData(null,null,null);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SkckModel> call, Throwable t) {
+                    SembunyiLoading();
+                    pesan(t.getMessage());
+                }
+            });
+        } catch (Exception e) {
+            SembunyiLoading();
+            e.printStackTrace();
+            pesan(e.getMessage());
+        }
+    }
+
     @Override
     public void onClick(View v) {
         if (v == edMulai) {
@@ -171,8 +208,10 @@ public class cek_data extends AppCompatActivity implements View.OnClickListener 
                 return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         };
-        skckadapter = new Skckadapter(new ArrayList<>());
+        skckadapter = new Skckadapter(new ArrayList<>(),this);
         gridDiary.setLayoutManager(linearLayoutManager);
         gridDiary.setAdapter(skckadapter);
     }
+
+
 }
