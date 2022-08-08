@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('kecamatan');
             $table->string('status');
+            $table->date('tanggal');
             $table->string('jk');
             $table->timestamps();
         });

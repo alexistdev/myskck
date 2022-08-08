@@ -14,15 +14,15 @@
             android:orientation="horizontal">
 
             <EditText
+                android:onClick="showTimePickerDialog"
                 android:id="@+id/tanggal_awal"
                 android:layout_width="118dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
-                android:autofillHints="Cari"
+                android:autofillHints="tanggal"
                 android:gravity="center"
                 android:inputType="date"
                 android:labelFor="@+id/tanggal_awal"
-                android:text="@string/cari1"
                 android:textColor="@color/white"
                 tools:ignore="DuplicateSpeakableTextCheck" />
 
@@ -38,14 +38,14 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:onClick="showTimePickerDialog"
                 android:labelFor="@+id/tanggal_akhir"
-                android:autofillHints="cari"
+                android:autofillHints="tanggal"
                 android:id="@+id/tanggal_akhir"
                 android:layout_width="117dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
                 android:inputType="date"
-                android:text="@string/cari1"
                 android:textColor="@color/white"/>
 
             <Button

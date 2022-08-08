@@ -2,33 +2,31 @@ package com.example.skckpolrespringsewu;
 
 import static java.lang.String.valueOf;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.skckpolrespringsewu.adapter.DatePickerFragment;
 import com.example.skckpolrespringsewu.adapter.Skckadapter;
 import com.example.skckpolrespringsewu.api.APIService;
 import com.example.skckpolrespringsewu.model.SkckModel;
 import com.example.skckpolrespringsewu.response.GetSkck;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,14 +35,16 @@ import retrofit2.Response;
 import retrofit2.internal.EverythingIsNonNull;
 
 
-public class cek_data extends AppCompatActivity {
+public class cek_data extends AppCompatActivity implements View.OnClickListener {
     private ProgressDialog pDialog;
     private Skckadapter skckadapter;
     private List<SkckModel> daftarskck;
     private RecyclerView gridDiary;
     private Button mCari;
-    private EditText edCari;
+    private EditText edCari,edMulai,edAkhir;
     private TextView jmlData;
+//    private int mYear, mMonth, mDay;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +53,57 @@ public class cek_data extends AppCompatActivity {
         initData();
         setupRecyclerView();
 
+        edMulai.setOnClickListener(this);
+        edAkhir.setOnClickListener(this);
+
         mCari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String search = edCari.getText().toString();
-                setData(search);
+                String tanggalMulai = edMulai.getText().toString();
+                String tanggalAkhir = edAkhir.getText().toString();
+
+                setData(search,tanggalMulai,tanggalAkhir);
             }
         });
     }
-    private void setData(String search){
+    @Override
+    public void onClick(View v) {
+        if (v == edMulai) {
+            final Calendar calendar = Calendar.getInstance ();
+            int mYear = calendar.get ( Calendar.YEAR );
+            int mMonth = calendar.get ( Calendar.MONTH );
+            int mDay = calendar.get ( Calendar.DAY_OF_MONTH );
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog ( this, new DatePickerDialog.OnDateSetListener () {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    edMulai.setText ( dayOfMonth + "-" + (month + 1) + "-" + year );
+                }
+            }, mYear, mMonth, mDay );
+            datePickerDialog.show ();
+        }
+        if (v == edAkhir) {
+            final Calendar calendar = Calendar.getInstance ();
+            int mYear = calendar.get ( Calendar.YEAR );
+            int mMonth = calendar.get ( Calendar.MONTH );
+            int mDay = calendar.get ( Calendar.DAY_OF_MONTH );
+
+            //show dialog
+            DatePickerDialog datePickerDialog = new DatePickerDialog ( this, new DatePickerDialog.OnDateSetListener () {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    edAkhir.setText ( dayOfMonth + "-" + (month + 1) + "-" + year );
+                }
+            }, mYear, mMonth, mDay );
+            datePickerDialog.show ();
+        }
+    }
+
+    private void setData(String search,String tanggalMulai,String tanggalAkhir){
         try{
-            Call<GetSkck> call= APIService.Factory.create(getApplicationContext()).dapatSKCK(search);
+            tampilLoading();
+            Call<GetSkck> call= APIService.Factory.create(getApplicationContext()).dapatSKCK(search,tanggalMulai,tanggalAkhir);
             call.enqueue(new Callback<GetSkck>() {
                 @EverythingIsNonNull
                 @Override
@@ -90,6 +130,11 @@ public class cek_data extends AppCompatActivity {
             pesan(e.getMessage());
         }
     }
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
     private void initData(){
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
@@ -98,6 +143,8 @@ public class cek_data extends AppCompatActivity {
         mCari = findViewById(R.id.btn_cek);
         edCari = findViewById(R.id.edx_cari);
         jmlData = findViewById(R.id.jumlahdata);
+        edMulai = findViewById(R.id.tanggal_awal);
+        edAkhir = findViewById(R.id.tanggal_akhir);
     }
 
     private void tampilLoading(){
@@ -128,5 +175,4 @@ public class cek_data extends AppCompatActivity {
         gridDiary.setLayoutManager(linearLayoutManager);
         gridDiary.setAdapter(skckadapter);
     }
-
 }

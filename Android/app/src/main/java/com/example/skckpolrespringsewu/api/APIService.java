@@ -20,7 +20,7 @@ import retrofit2.http.Query;
 public interface APIService {
 
     @GET("api/skck")
-    Call<GetSkck> dapatSKCK(@Query("cari") String cari);
+    Call<GetSkck> dapatSKCK(@Query("cari") String cari,@Query("tanggal_mulai") String tanggalMulai,@Query("tanggal_akhir") String tanggalAkhir);
 
     @FormUrlEncoded
     @POST("api/skck")

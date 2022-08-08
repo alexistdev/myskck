@@ -38,6 +38,7 @@
     <string name="card4">Status: Menikah</string>
     <string name="card5">Kecamatan: Gading Rejo</string>
     <string name="card6">Tanggal: 01&#8211;01&#8211;2022</string>
+    <string name="card7">Delete</string>
 
     <!-- CARI -->
     <string name="cari1">-- / -- / ----</string>
@@ -46,6 +47,14 @@
     <string name="cari4">Jumlah data :</string>
     <string name="cari5">0</string>
     <string name="cari6">Grand Total :</string>
+
+
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="date_label_set">Press the button to set the date</string>
+    <string name="date_button_set">Set Date</string>
+    <string name="date_view_set">The Date is: </string>
+    <string name="date_selected"></string>
 
 
 </resources>
