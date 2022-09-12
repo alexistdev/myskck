@@ -1,3 +1,3 @@
 # myskck
 
-Menambahkan fitur search yang dibuat oleh Faizal
+Aplikasi ini dikembangkan oleh Faizal, dan saya hanya menambahkan fitur search yang dibuat oleh Faizal dan rest api nya saja.
